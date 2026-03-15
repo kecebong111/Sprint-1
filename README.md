@@ -36,18 +36,44 @@ Backend system for schools to monitor nutritional stock (milk, supplements) for 
 
 ## Core API Endpoints
 
-### Inventory
-- `GET /api/inventory` - Get all items
-- `GET /api/inventory/summary` - Get dashboard stats
-- `GET /api/inventory/alerts` - Get low stock items
-- `POST /api/inventory` - Create new item
-- `GET /api/inventory/:id` - Get item details with transaction history
-- `PATCH /api/inventory/:id` - Update item details
-- `DELETE /api/inventory/:id` - Delete item
+### 1. Create New Item
+**Endpoint:** `POST /api/inventory`  
+**Description:** Register a new item in the inventory.
 
-### Transactions
-- `POST /api/inventory/:id/transaction` - Record stock movement (IN/OUT)
-- `GET /api/inventory/transactions` - View all transaction history
+**Payload (JSON):**
+```json
+{
+  "name": "Full Cream Milk",
+  "category": "Dairy",
+  "unit": "Bottle",
+  "quantity": 100,
+  "criticalThreshold": 20
+}
+```
+
+### 2. Record Stock Transaction (IN/OUT)
+**Endpoint:** `POST /api/inventory/:id/transaction`  
+**Description:** Record movement of stock. Use `IN` for adding stock and `OUT` for distributing/removing stock.
+
+**Payload (JSON):**
+```json
+{
+  "type": "OUT",
+  "amount": 10,
+  "reason": "Distributed to Class 1A"
+}
+```
+
+### 3. Inventory Management
+- `GET /api/inventory` - Get all items.
+- `GET /api/inventory/summary` - Get dashboard stats (Total items, low stock alerts, recent transactions).
+- `GET /api/inventory/alerts` - Get all items currently below their critical threshold.
+- `GET /api/inventory/:id` - Get item details including full transaction history.
+- `PATCH /api/inventory/:id` - Update item details (name, category, threshold).
+- `DELETE /api/inventory/:id` - Remove an item from the system.
+
+### 4. Transaction History
+- `GET /api/inventory/transactions` - View history of all stock movements across all items.
 
 ## Development
 

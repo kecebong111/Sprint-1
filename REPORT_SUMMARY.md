@@ -40,7 +40,5 @@ A containerized Express.js API designed to manage school inventory for the Makan
    - `POST /api/inventory/:id/transaction`: Record stock movement.
    - `GET /api/inventory/alerts`: Check items with low stock.
 
-## 5. Implementation Screenshots
-*(Note: Please attach your actual screenshots of Postman/Swagger here)*
-- Example of `GET /api/inventory` returning a list of items.
-- Example of `GET /api/inventory/alerts` showing items below threshold.
+## 5. Verification
+The system has been verified through manual testing of all endpoints and validation of the containerized environment.
